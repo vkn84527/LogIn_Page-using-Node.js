@@ -54,6 +54,7 @@ app.post('/api/change-password', async (req, res) => {
 			}
 		)
 		res.json({ status: 'ok' })
+		sendmailc.ab2()
 	} catch (error) {
 		console.log(error)
 		res.json({ status: 'error', error: ';))' })
