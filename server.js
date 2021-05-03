@@ -11,6 +11,7 @@ let alert = require('alert');
 var nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken')
 const sendmailr= require('./model/mail2')
+const sendmailc= require('./model/mail')
 //console.log(sendmail)
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
@@ -24,6 +25,11 @@ const app = express()
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(bodyParser.json())
 
+app.get('/change-password-using-email',(req,res) =>{
+	res.send(sendmailc.ab2())
+	console.log("Email send to your Mail")
+	alert('Email Send on your Mail')
+})
 
 app.post('/api/change-password', async (req, res) => {
 	const { token, newpassword: plainTextPassword } = req.body
@@ -51,7 +57,9 @@ app.post('/api/change-password', async (req, res) => {
 			{ _id },
 			{
 				$set: { password }
+				
 			}
+			
 		)
 		res.json({ status: 'ok' })
 		sendmailc.ab2()
